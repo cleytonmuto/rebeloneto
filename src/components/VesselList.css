@@ -159,6 +159,14 @@
 }
 
 @media (max-width: 768px) {
+  .vessel-list {
+    max-height: 60vh;
+  }
+
+  .vessel-card {
+    padding: 15px;
+  }
+
   .vessel-card-body {
     grid-template-columns: 1fr;
     gap: 10px;
@@ -168,6 +176,45 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
+  }
+
+  .vessel-card-header h3 {
+    font-size: 16px;
+  }
+
+  .vessel-card-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .edit-button,
+  .delete-button {
+    flex: 1;
+    max-width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .vessel-card {
+    padding: 12px;
+  }
+
+  .vessel-card-header h3 {
+    font-size: 15px;
+  }
+
+  .info-value {
+    font-size: 14px;
+  }
+
+  .info-label {
+    font-size: 11px;
+  }
+
+  .edit-button,
+  .delete-button {
+    font-size: 12px;
+    padding: 5px 10px;
   }
 }
 

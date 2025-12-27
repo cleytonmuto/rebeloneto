@@ -105,6 +105,7 @@
   .chart-summary {
     flex-direction: column;
     gap: 15px;
+    padding: 15px;
   }
 
   .summary-item {
@@ -114,6 +115,48 @@
     padding: 10px;
     background: white;
     border-radius: 6px;
+  }
+
+  .summary-value {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .passenger-chart-container {
+    padding: 15px;
+    margin-top: 15px;
+  }
+
+  .chart-wrapper {
+    height: 250px;
+  }
+
+  .chart-filters {
+    gap: 6px;
+  }
+
+  .filter-button {
+    padding: 6px 10px;
+    font-size: 12px;
+    min-width: calc(50% - 3px);
+  }
+
+  .chart-summary {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .summary-item {
+    padding: 8px;
+  }
+
+  .summary-label {
+    font-size: 12px;
+  }
+
+  .summary-value {
+    font-size: 16px;
   }
 }
 

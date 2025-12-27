@@ -55,8 +55,30 @@
 }
 
 @media (max-width: 768px) {
+  .vessel-form {
+    gap: 15px;
+  }
+
   .form-row {
     grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .submit-button {
+    width: 100%;
+    padding: 14px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-group label {
+    font-size: 13px;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 10px;
+    font-size: 14px;
   }
 }
 

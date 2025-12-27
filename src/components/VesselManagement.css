@@ -186,3 +186,62 @@
   color: #666;
 }
 
+@media (max-width: 768px) {
+  .add-vessel-form .form-group {
+    flex-direction: column;
+  }
+
+  .add-button {
+    width: 100%;
+  }
+
+  .vessel-item {
+    flex-wrap: wrap;
+  }
+
+  .vessel-actions {
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 8px;
+  }
+
+  .edit-vessel-button,
+  .delete-vessel-button {
+    flex: 1;
+    max-width: 120px;
+  }
+
+  .vessel-edit-actions {
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  .save-vessel-button,
+  .cancel-vessel-button {
+    flex: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .vessel-item {
+    padding: 8px 10px;
+  }
+
+  .vessel-name {
+    font-size: 14px;
+  }
+
+  .edit-vessel-input {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+
+  .edit-vessel-button,
+  .delete-vessel-button,
+  .save-vessel-button,
+  .cancel-vessel-button {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+}
+
