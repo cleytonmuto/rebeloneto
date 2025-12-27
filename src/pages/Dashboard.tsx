@@ -8,6 +8,7 @@ import { VesselList } from '../components/VesselList';
 import { EditVesselModal } from '../components/EditVesselModal';
 import { VesselManagement } from '../components/VesselManagement';
 import { Tabs } from '../components/Tabs';
+import { PassengerChart } from '../components/PassengerChart';
 import { exportToExcel, exportToPDF } from '../utils/exportReports';
 import './Dashboard.css';
 
@@ -208,6 +209,10 @@ export const Dashboard = () => {
             />
           )}
         </div>
+      </div>
+
+      <div className="dashboard-content-full">
+        <PassengerChart records={records} />
       </div>
 
       {editingRecord && (
