@@ -44,12 +44,63 @@
   margin-bottom: 15px;
   padding-bottom: 15px;
   border-bottom: 1px solid #e0e0e0;
+  gap: 12px;
+}
+
+.vessel-card-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  flex-wrap: wrap;
 }
 
 .vessel-card-header h3 {
   margin: 0;
   color: #333;
   font-size: 18px;
+}
+
+.vessel-card-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.edit-button,
+.delete-button {
+  background: none;
+  border: 1px solid #ddd;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  font-weight: 500;
+}
+
+.edit-button {
+  color: #1976d2;
+  border-color: #1976d2;
+}
+
+.edit-button:hover {
+  background-color: #e3f2fd;
+  border-color: #1565c0;
+}
+
+.delete-button {
+  color: #d32f2f;
+  border-color: #d32f2f;
+}
+
+.delete-button:hover {
+  background-color: #ffebee;
+  border-color: #c62828;
 }
 
 .operation-badge {

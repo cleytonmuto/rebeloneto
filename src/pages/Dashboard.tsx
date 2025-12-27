@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { collection, addDoc, query, orderBy, onSnapshot, Timestamp } from 'firebase/firestore';
+import { collection, addDoc, updateDoc, deleteDoc, doc, query, orderBy, onSnapshot, Timestamp } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import type { VesselRecord } from '../types';
 import { VesselForm } from '../components/VesselForm';
 import { VesselList } from '../components/VesselList';
+import { EditVesselModal } from '../components/EditVesselModal';
 import './Dashboard.css';
 
 export const Dashboard = () => {
   const { currentUser, logout } = useAuth();
   const [records, setRecords] = useState<VesselRecord[]>([]);
   const [loading, setLoading] = useState(true);
+  const [editingRecord, setEditingRecord] = useState<VesselRecord | null>(null);
 
   useEffect(() => {
     const q = query(collection(db, 'vesselRecords'), orderBy('date', 'desc'));
@@ -56,6 +58,35 @@ export const Dashboard = () => {
     }
   };
 
+  const handleEditRecord = (record: VesselRecord) => {
+    setEditingRecord(record);
+  };
+
+  const handleUpdateRecord = async (record: Omit<VesselRecord, 'id' | 'createdAt' | 'createdBy'>) => {
+    if (!editingRecord?.id) return;
+
+    try {
+      const recordRef = doc(db, 'vesselRecords', editingRecord.id);
+      await updateDoc(recordRef, {
+        ...record,
+      });
+      setEditingRecord(null);
+    } catch (error) {
+      console.error('Error updating record:', error);
+      alert('Erro ao atualizar registro. Tente novamente.');
+    }
+  };
+
+  const handleDeleteRecord = async (recordId: string) => {
+    try {
+      const recordRef = doc(db, 'vesselRecords', recordId);
+      await deleteDoc(recordRef);
+    } catch (error) {
+      console.error('Error deleting record:', error);
+      alert('Erro ao excluir registro. Tente novamente.');
+    }
+  };
+
   const handleLogout = async () => {
     try {
       await logout();
@@ -90,10 +121,23 @@ export const Dashboard = () => {
           {loading ? (
             <div className="loading">Carregando registros...</div>
           ) : (
-            <VesselList records={records} />
+            <VesselList 
+              records={records} 
+              onEdit={handleEditRecord}
+              onDelete={handleDeleteRecord}
+            />
           )}
         </div>
       </div>
+
+      {editingRecord && (
+        <EditVesselModal
+          record={editingRecord}
+          isOpen={!!editingRecord}
+          onClose={() => setEditingRecord(null)}
+          onSave={handleUpdateRecord}
+        />
+      )}
     </div>
   );
 };
