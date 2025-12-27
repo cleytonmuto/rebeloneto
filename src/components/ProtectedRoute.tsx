@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
 interface ProtectedRouteProps {
@@ -8,6 +8,7 @@ interface ProtectedRouteProps {
 
 export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const { currentUser, loading } = useAuth();
+  const location = useLocation();
 
   if (loading) {
     return (
@@ -23,7 +24,12 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   }
 
   if (!currentUser) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  // Verificar se o usuário tem perfil admin
+  if (currentUser.profile !== 'admin') {
+    return <Navigate to="/login" state={{ unauthorized: true }} replace />;
   }
 
   return <>{children}</>;
