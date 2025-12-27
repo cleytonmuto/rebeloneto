@@ -1,0 +1,122 @@
+.vessel-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.vessel-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.vessel-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.vessel-list::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.vessel-list::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.vessel-card {
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  transition: box-shadow 0.3s ease;
+}
+
+.vessel-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.vessel-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.vessel-card-header h3 {
+  margin: 0;
+  color: #333;
+  font-size: 18px;
+}
+
+.operation-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.operation-badge.embarque {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.operation-badge.desembarque {
+  background-color: #fff3e0;
+  color: #f57c00;
+}
+
+.vessel-card-body {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-label {
+  font-size: 12px;
+  color: #666;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.info-value {
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+}
+
+.empty-state-subtitle {
+  font-size: 14px;
+  margin-top: 10px;
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .vessel-card-body {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .vessel-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
