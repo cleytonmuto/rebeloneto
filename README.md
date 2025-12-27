@@ -74,6 +74,13 @@ service cloud.firestore {
       allow write: if request.auth != null && request.auth.uid == userId;
     }
     
+    // Regras para a coleção de embarcações
+    match /vessels/{vesselId} {
+      allow read: if request.auth != null;
+      allow create, update, delete: if request.auth != null && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.profile == 'admin';
+    }
+    
     // Regras para a coleção de registros de embarcações
     match /vesselRecords/{recordId} {
       allow read: if request.auth != null;
@@ -85,6 +92,10 @@ service cloud.firestore {
   }
 }
 ```
+
+**Importante:** Você também precisará criar um índice composto no Firestore:
+- Coleção: `vessels`
+- Campo: `name` (ordem crescente)
 
 ### 5. Configurar perfis de usuário
 
@@ -140,11 +151,19 @@ src/
 ## Uso
 
 1. Acesse a aplicação
-2. Faça login com sua conta Google
+2. Faça login com sua conta Google (apenas usuários admin)
 3. No dashboard, você pode:
-   - Registrar novas embarcações com os dados solicitados
-   - Visualizar todos os registros realizados
+   - **Gerenciar Embarcações**: Cadastrar e excluir nomes de embarcações que serão usadas nos registros
+   - **Registrar Operações**: Criar novos registros selecionando uma embarcação cadastrada, tipo de operação, data, horário e quantidade de passageiros
+   - **Visualizar Registros**: Ver todos os registros realizados em tempo real
+   - **Editar/Excluir**: Editar ou excluir registros existentes
    - Ver informações do usuário logado e seu perfil
+
+### Fluxo de Trabalho
+
+1. **Primeiro passo**: Cadastre as embarcações na seção "Gerenciar Embarcações"
+2. **Segundo passo**: Use o formulário "Novo Registro" para criar registros selecionando uma embarcação do dropdown
+3. **Gerenciamento**: Edite ou exclua registros conforme necessário
 
 ## Tecnologias Utilizadas
 

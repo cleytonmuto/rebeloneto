@@ -5,6 +5,13 @@ export interface User {
   profile: 'admin' | 'guest';
 }
 
+export interface Vessel {
+  id?: string;
+  name: string;
+  createdAt?: string;
+  createdBy?: string;
+}
+
 export interface VesselRecord {
   id?: string;
   vesselName: string;

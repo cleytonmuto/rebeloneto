@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { FormEvent } from 'react';
-import type { VesselRecord, OperationType } from '../types';
+import type { VesselRecord, OperationType, Vessel } from '../types';
 import './EditVesselModal.css';
 
 interface EditVesselModalProps {
@@ -8,9 +8,10 @@ interface EditVesselModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSave: (record: Omit<VesselRecord, 'id' | 'createdAt' | 'createdBy'>) => void;
+  vessels: Vessel[];
 }
 
-export const EditVesselModal = ({ record, isOpen, onClose, onSave }: EditVesselModalProps) => {
+export const EditVesselModal = ({ record, isOpen, onClose, onSave, vessels }: EditVesselModalProps) => {
   const [formData, setFormData] = useState({
     vesselName: record.vesselName,
     operationType: record.operationType,
@@ -77,14 +78,19 @@ export const EditVesselModal = ({ record, isOpen, onClose, onSave }: EditVesselM
         <form onSubmit={handleSubmit} className="vessel-form">
           <div className="form-group">
             <label htmlFor="edit-vesselName">Nome da Embarcação *</label>
-            <input
-              type="text"
+            <select
               id="edit-vesselName"
               value={formData.vesselName}
               onChange={(e) => setFormData({ ...formData, vesselName: e.target.value })}
               required
-              placeholder="Ex: Balsa Rio Grande"
-            />
+            >
+              <option value="">Selecione uma embarcação</option>
+              {vessels.map((vessel) => (
+                <option key={vessel.id} value={vessel.name}>
+                  {vessel.name}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="form-group">

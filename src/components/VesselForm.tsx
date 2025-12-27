@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
-import type { VesselRecord, OperationType } from '../types';
+import type { VesselRecord, OperationType, Vessel } from '../types';
 import './VesselForm.css';
 
 interface VesselFormProps {
   onSubmit: (record: Omit<VesselRecord, 'id' | 'createdAt' | 'createdBy'>) => void;
+  vessels: Vessel[];
 }
 
-export const VesselForm = ({ onSubmit }: VesselFormProps) => {
+export const VesselForm = ({ onSubmit, vessels }: VesselFormProps) => {
   const [formData, setFormData] = useState({
     vesselName: '',
     operationType: 'embarque' as OperationType,
@@ -62,14 +63,24 @@ export const VesselForm = ({ onSubmit }: VesselFormProps) => {
     <form onSubmit={handleSubmit} className="vessel-form">
       <div className="form-group">
         <label htmlFor="vesselName">Nome da Embarcação *</label>
-        <input
-          type="text"
+        <select
           id="vesselName"
           value={formData.vesselName}
           onChange={(e) => setFormData({ ...formData, vesselName: e.target.value })}
           required
-          placeholder="Ex: Balsa Rio Grande"
-        />
+        >
+          <option value="">Selecione uma embarcação</option>
+          {vessels.map((vessel) => (
+            <option key={vessel.id} value={vessel.name}>
+              {vessel.name}
+            </option>
+          ))}
+        </select>
+        {vessels.length === 0 && (
+          <small style={{ color: '#d32f2f', marginTop: '4px', display: 'block' }}>
+            Nenhuma embarcação cadastrada. Cadastre uma embarcação primeiro.
+          </small>
+        )}
       </div>
 
       <div className="form-group">
