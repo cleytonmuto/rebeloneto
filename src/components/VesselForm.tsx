@@ -1,5 +1,6 @@
-import { useState, FormEvent } from 'react';
-import { VesselRecord, OperationType } from '../types';
+import { useState } from 'react';
+import type { FormEvent } from 'react';
+import type { VesselRecord, OperationType } from '../types';
 import './VesselForm.css';
 
 interface VesselFormProps {

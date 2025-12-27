@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { collection, addDoc, query, orderBy, onSnapshot, Timestamp } from 'firebase/firestore';
 import { db } from '../config/firebase';
-import { VesselRecord } from '../types';
+import type { VesselRecord } from '../types';
 import { VesselForm } from '../components/VesselForm';
 import { VesselList } from '../components/VesselList';
 import './Dashboard.css';

@@ -1,4 +1,4 @@
-import { VesselRecord } from '../types';
+import type { VesselRecord } from '../types';
 import './VesselList.css';
 
 interface VesselListProps {
